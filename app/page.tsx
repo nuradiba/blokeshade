@@ -1,7 +1,28 @@
 "use client"
 import { motion } from "framer-motion"
+import { projects } from './data'
+import { useScroll } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import Card from './card'
+import Lenis from '@studio-freight/lenis'
 
 export default function Home() {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ['start start', 'end end']
+  })
+
+  useEffect( () => {
+    const lenis = new Lenis()
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  })
   return (
     <main className="bg-black text-white w-screen">
       <section className="grid h-screen">
@@ -57,6 +78,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {
+        projects.map( (project, i) => {
+          const targetScale = 1 - ( (projects.length - i) * 0.05);
+          return <Card key={`p_${i}`} i={i} {...project} progress={scrollYProgress} range={[i * .25, 1]} targetScale={targetScale}/>
+        })
+      }
     </main>
   );
 }
