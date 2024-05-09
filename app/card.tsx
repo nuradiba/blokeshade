@@ -36,7 +36,7 @@ const Card = ({i, title, description, src, date, color, text, progress, range, t
           <div className={'w-full md:w-5/12 '+styles.description+' '+text}>
             <p>{description}</p>
             <span>
-              <small className={'italic text-gray-100 '+text}>{date}</small>
+              <small className={'italic '+text}>{date}</small>
             </span>
           </div>
 

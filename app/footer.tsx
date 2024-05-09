@@ -4,7 +4,7 @@ export default function Footer() {
     let date = new Date()
     let year = date.getFullYear()
     return (
-        <footer className="text-xs md:text-sm text-white px-5 sm:px-12 2xl:px-56 py-10">
+        <footer className="text-xs md:text-sm text-white px-5 sm:px-12 2xl:px-40 py-10">
             <section className="hidden xl:flex justify-between">
                 <div className='flex'>
                     <span className={styles.liner}>Blokeshade Enterprise</span>
