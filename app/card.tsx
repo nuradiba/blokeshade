@@ -26,7 +26,7 @@ const Card = ({i, title, description, src, date, color, text, progress, range, t
   const scale = useTransform(progress, range, [1, targetScale]);
  
   return (
-    <div ref={container} className={styles.cardContainer}>
+    <div ref={container} className={styles.cardContainer+' text-justify'}>
       <motion.div 
         style={{backgroundColor: color, scale, top:`calc(-5vh + ${i * 25}px)`}} 
         className={'h-[700px] md:h-[500px] '+styles.card}

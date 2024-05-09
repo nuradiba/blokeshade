@@ -4,8 +4,8 @@ export default function Footer() {
     let date = new Date()
     let year = date.getFullYear()
     return (
-        <footer className="text-xs md:text-sm text-white px-5 md:px-56 py-10">
-            <section className="hidden md:flex justify-between">
+        <footer className="text-xs md:text-sm text-white px-5 sm:px-12 2xl:px-56 py-10">
+            <section className="hidden xl:flex justify-between">
                 <div className='flex'>
                     <span className={styles.liner}>Blokeshade Enterprise</span>
                     <span className={styles.liner}>{year}</span>
@@ -26,7 +26,7 @@ export default function Footer() {
                     </a>
                 </div>
             </section>
-            <section className='flex md:hidden flex-col gap-2'>
+            <section className='flex xl:hidden flex-col gap-2'>
                 <p className='flex gap-5'>
                     <span>Blokeshade Enterprise</span>
                     <span>{year}</span>
