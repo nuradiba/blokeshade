@@ -1,28 +1,16 @@
 "use client"
 import { motion } from "framer-motion"
 import { projects } from './data'
-import { useScroll } from 'framer-motion'
-import { useRef, useEffect } from 'react'
-import Card from './card'
-import Lenis from '@studio-freight/lenis'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
 
 export default function Home() {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ['start start', 'end end']
-  })
 
   useEffect(() => {
-    const lenis = new Lenis()
+    AOS.init();
+  }, []); 
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-  })
   return (
     <main className="bg-black text-white w-screen">
       <section className="grid h-screen">
@@ -78,12 +66,19 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {
-          projects.map((project, i) => {
-            const targetScale = 1 - ((projects.length - i) * 0.05);
-            return <Card key={`p_${i}`} i={i} {...project} progress={scrollYProgress} range={[i * .25, 1]} targetScale={targetScale} />
-          })
+      <section className="h-screen">
+        <div data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine">
+          <h1 className="text-4xl font-bold text-center pb-10">Projects</h1>
+        </div>
+        {
+          projects.map((project, i) => (
+            <div className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">{project.title}</div>
+          ))
         }
+        <div className="border-t-2" />
+      </section>
     </main>
   );
 }

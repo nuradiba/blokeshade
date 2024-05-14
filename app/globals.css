@@ -31,3 +31,43 @@ body {
     text-wrap: balance;
   }
 }
+
+.liner {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+
+  &:after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: white;
+    min-width: 50px;
+    margin: auto;
+  }
+
+  &:after {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.longLiner {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+
+  &:after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: white;
+    min-width: 100px;
+    margin: auto;
+  }
+
+  &:after {
+    margin-left: 20px;
+
+  }
+}
