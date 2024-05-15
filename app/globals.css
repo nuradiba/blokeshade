@@ -16,14 +16,16 @@
   }
 }
 
+@font-face {
+  font-family: 'About';
+  src: url('../public/PPPangaia-Bold.otf');
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -69,5 +71,27 @@ body {
   &:after {
     margin-left: 20px;
 
+  }
+}
+
+.paragraph {
+  display: flex;
+  font-size: 60px;
+  line-height: 1;
+  padding: 40px;
+  max-width: 1280px;
+  color: white;
+  flex-wrap: wrap;
+  font-family: 'About';
+
+  .word {
+    position: relative;
+    margin-right: 12px;
+    margin-top: 12px;
+
+    .shadow {
+      position: absolute;
+      opacity: 20%;
+    }
   }
 }

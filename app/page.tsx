@@ -4,12 +4,15 @@ import { projects } from './data'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from 'react'
+import Character from './components/character'
+
+const paragraph = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
 
 export default function Home() {
 
   useEffect(() => {
     AOS.init();
-  }, []); 
+  }, [])
 
   return (
     <main className="bg-black text-white w-screen">
@@ -65,6 +68,9 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
+      </section>
+      <section className="h-screen">
+        <Character paragraph={paragraph} />
       </section>
       <section className="h-screen">
         <div data-aos="fade-right"
