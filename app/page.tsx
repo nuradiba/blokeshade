@@ -80,7 +80,9 @@ export default function Home() {
         </div>
         {
           projects.map((project, i) => (
-            <div key={i} className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">{project.title}</div>
+            <div key={i} className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
+              <span data-aos="zoom-out-left" data-aos-duration={project.duration}>{project.title}</span>
+            </div>
           ))
         }
         <div className="border-t-2" />

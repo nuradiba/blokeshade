@@ -5,7 +5,8 @@ export const projects = [
     src: "IMG_9497.jpg",
     date: "May 06, 2024",
     color: "#EFEFEF",
-    text: "text-black"
+    text: "text-black",
+    duration: 500
   },
   {
     title: "KTM 890 SMT launched in Malaysia",
@@ -13,7 +14,8 @@ export const projects = [
     src: "DSC00138.jpg",
     date: "May 04, 2024",
     color: "#D7D7D7",
-    text: "text-black"
+    text: "text-black",
+    duration: 1000
   },
   {
     title: "We Ride As One",
@@ -21,7 +23,8 @@ export const projects = [
     src: "ALIP0330.jpg",
     date: "May 04, 2024",
     color: "#BFBFBF",
-    text: "text-black"
+    text: "text-black",
+    duration: 1500
   },
   {
     title: "Mega Iftar DOCM",
@@ -29,7 +32,8 @@ export const projects = [
     src: "R7KZ1243.jpg",
     date: "March 30, 2024",
     color: "#A7A7A7",
-    text: "text-white"
+    text: "text-white",
+    duration: 2000
   },
   {
     title: "President Inaugural Ride",
@@ -37,7 +41,8 @@ export const projects = [
     src: "R7KZ1243.jpg",
     date: "March 30, 2024",
     color: "#A7A7A7",
-    text: "text-white"
+    text: "text-white",
+    duration: 2500
   },
   {
     title: "Trackday Sepang",
@@ -45,7 +50,8 @@ export const projects = [
     src: "R7KZ1243.jpg",
     date: "March 30, 2024",
     color: "#A7A7A7",
-    text: "text-white"
+    text: "text-white",
+    duration: 3000
   },
   {
     title: "Braaap Motorsport",
@@ -53,7 +59,8 @@ export const projects = [
     src: "R7KZ1243.jpg",
     date: "March 30, 2024",
     color: "#A7A7A7",
-    text: "text-white"
+    text: "text-white",
+    duration: 3000
   },
   {
     title: "Royal Enfield Ride to Kuantan",
@@ -61,6 +68,7 @@ export const projects = [
     src: "R7KZ1243.jpg",
     date: "March 30, 2024",
     color: "#A7A7A7",
-    text: "text-white"
+    text: "text-white",
+    duration: 3000
   }
 ]

@@ -76,7 +76,6 @@ body {
 
 .paragraph {
   display: flex;
-  font-size: 60px;
   line-height: 1;
   padding: 40px;
   max-width: 1280px;
