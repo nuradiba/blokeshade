@@ -108,8 +108,8 @@ export default function Home() {
           </div>
           {
             projects.map((project, i) => (
-              <Link href={`/gallery/${project.ref}`}>
-              <div key={i} className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
+              <Link key={i} href={`/gallery/${project.ref}`}>
+              <div className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
                   <span>{project.title}</span>
               </div>
               </Link>
