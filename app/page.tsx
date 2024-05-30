@@ -8,6 +8,7 @@ import Character from './components/character'
 import Image from 'next/image'
 import ALIP0330 from '../public/ALIP0330.jpeg'
 import Lenis from 'lenis'
+import Zoom from './components/zoom'
 
 const paragraph = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
 
@@ -93,7 +94,7 @@ export default function Home() {
         <div className='relative z-10 p-20 text-white w-full h-full flex flex-col justify-between'>
           <p className='sm:w-[50vw] sm:text-[2vw] self-end uppercase text-justify font-semibold'>Beauty and quality need the right time to be conceived and realised even in a world that is in too much of a hurry.</p>
         </div>
-        <div className='fixed top-[-4vh] left-0 h-[120vh] w-full'>
+        <div className='fixed top-[-10vh] left-0 h-[120vh] w-full'>
           <motion.div style={{ y }} className='relative w-full h-full'>
             <Image src={ALIP0330} alt="image" fill style={{ objectFit: "cover" }} sizes="100vw" className="brightness-50" />
           </motion.div>
@@ -102,20 +103,23 @@ export default function Home() {
       <section className="grid content-center h-screen">
         <Character paragraph={paragraph} />
       </section>
-      <section className="h-screen">
-        <div data-aos="fade-right"
-          data-aos-offset="300"
-          data-aos-easing="ease-in-sine">
-          <h1 className="text-4xl font-bold text-center pb-10">Projects</h1>
+      <Zoom />
+      <section className="grid content-center h-screen">
+        <div>
+          <div data-aos="fade-right"
+            data-aos-offset="300"
+            data-aos-easing="ease-in-sine">
+            <h1 className="text-4xl font-bold text-center pb-10">Projects</h1>
+          </div>
+          {
+            projects.map((project, i) => (
+              <div key={i} className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
+                <span>{project.title}</span>
+              </div>
+            ))
+          }
+          <div className="border-t-2" />
         </div>
-        {
-          projects.map((project, i) => (
-            <div key={i} className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
-              <span>{project.title}</span>
-            </div>
-          ))
-        }
-        <div className="border-t-2" />
       </section>
     </main>
   );
