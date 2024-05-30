@@ -1,22 +1,19 @@
 "use client"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { projects } from './data'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 import { useEffect, useRef } from 'react'
 import Character from './components/character'
 import Image from 'next/image'
 import ALIP0330 from '../public/ALIP0330.jpeg'
-import Lenis from 'lenis'
+import Lenis from '@studio-freight/lenis'
 import Zoom from './components/zoom'
+import Link from 'next/link'
 
 const paragraph = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
 
 export default function Home() {
 
   useEffect(() => {
-    AOS.init();
-
     const lenis = new Lenis()
     function raf(time: number) {
       lenis.raf(time)
@@ -106,16 +103,16 @@ export default function Home() {
       <Zoom />
       <section className="grid content-center h-screen">
         <div>
-          <div data-aos="fade-right"
-            data-aos-offset="300"
-            data-aos-easing="ease-in-sine">
+          <div>
             <h1 className="text-4xl font-bold text-center pb-10">Projects</h1>
           </div>
           {
             projects.map((project, i) => (
+              <Link href={`/gallery/${project.ref}`}>
               <div key={i} className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
-                <span>{project.title}</span>
+                  <span>{project.title}</span>
               </div>
+              </Link>
             ))
           }
           <div className="border-t-2" />
