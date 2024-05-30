@@ -18,7 +18,7 @@ export default function Page({ params }: { params: { ref: string } }) {
     const data = projects.find(project => project.ref === params.ref)
     return (
         <main className='bg-black h-screen flex flex-col justify-center px-5 py-10 lg:px-80 lg:py-20'>
-            <h1 className='font-about text-2xl lg:text-3xl font-semibold tracking-wider text-white text-center mb-16 lg:mb-10'>{data?.title}</h1>
+            <h1 className='font-about text-2xl lg:text-3xl font-semibold tracking-wider text-white text-center mb-16 lg:mb-10' key={data?.ref}>{data?.title}</h1>
             <p className='text-xs animate-bounce text-white hidden lg:block'>Slide to the left</p>
             <section className='flex items-center justify-center'>
             <Swiper
