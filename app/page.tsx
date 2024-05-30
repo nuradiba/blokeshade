@@ -7,9 +7,9 @@ import ALIP0330 from '../public/ALIP0330.jpeg'
 import Lenis from '@studio-freight/lenis'
 import Zoom from './components/zoom'
 
-const paragraph = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+const paragraph = "Experience the adrenaline of motorsports through our lens at Blokeshade Enterprise. From track to road, we immortalize every electrifying moment. Enjoy the pictures above!"
 
-export default function Home() {
+export default function Page() {
 
   useEffect(() => {
     const lenis = new Lenis()
@@ -87,7 +87,7 @@ export default function Home() {
         className='relative flex items-center justify-center h-screen'
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}>
         <div className='relative z-10 p-20 text-white w-full h-full flex flex-col justify-between'>
-          <p className='sm:w-[50vw] sm:text-[2vw] self-end uppercase text-justify font-semibold'>Beauty and quality need the right time to be conceived and realised even in a world that is in too much of a hurry.</p>
+          <p className='sm:w-[50vw] sm:text-[2vw] self-end uppercase text-justify font-semibold'>Welcome to Blokeshade Enterprise, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade Enterprise.</p>
         </div>
         <div className='fixed top-[-10vh] left-0 h-[120vh] w-full'>
           <motion.div style={{ y }} className='relative w-full h-full'>
