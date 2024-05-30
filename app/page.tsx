@@ -1,13 +1,11 @@
 "use client"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { projects } from './data'
 import { useEffect, useRef } from 'react'
 import Character from './components/character'
 import Image from 'next/image'
 import ALIP0330 from '../public/ALIP0330.jpeg'
 import Lenis from '@studio-freight/lenis'
 import Zoom from './components/zoom'
-import Link from 'next/link'
 
 const paragraph = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
 
@@ -101,23 +99,6 @@ export default function Home() {
         <Character paragraph={paragraph} />
       </section>
       <Zoom />
-      <section className="grid content-center h-screen">
-        <div>
-          <div>
-            <h1 className="text-4xl font-bold text-center pb-10">Projects</h1>
-          </div>
-          {
-            projects.map((project, i) => (
-              <Link key={i} href={`/gallery/${project.ref}`}>
-              <div className="text-right border-t-2 py-3 px-3 md:px-20 hover:text-center hover:bg-white hover:text-black">
-                  <span>{project.title}</span>
-              </div>
-              </Link>
-            ))
-          }
-          <div className="border-t-2" />
-        </div>
-      </section>
     </main>
   );
 }

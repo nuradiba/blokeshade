@@ -16,11 +16,6 @@
   }
 }
 
-@font-face {
-  font-family: 'About';
-  src: url('../public/PPPangaia-Bold.otf');
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom,
@@ -81,7 +76,6 @@ body {
   max-width: 1280px;
   color: white;
   flex-wrap: wrap;
-  font-family: 'About';
 
   .word {
     position: relative;
@@ -169,8 +163,4 @@ body {
           }
       }
   }
-}
-
-.font-about {
-  font-family: 'About';
 }
