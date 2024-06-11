@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Item } from "./item";
+import { Footer } from "./footer";
 
 const variants = {
   open: {
@@ -12,11 +13,19 @@ const variants = {
 };
 
 export const Navigation = () => (
-  <motion.ul variants={variants}>
-    {itemIds.map(i => (
-      <Item i={i} key={i} />
-    ))}
-  </motion.ul>
+  <section className="px-[50px] py-[25px]">
+    <motion.ul variants={variants}>
+      {itemIds.map(i => (
+        <Item i={i} key={i} />
+      ))}
+    </motion.ul>
+    <motion.div variants={variants} className="absolute bottom-32">
+      {itemIds.map(i => (
+        <Footer i={i} key={i} />
+      ))}
+    </motion.div>
+    <motion.div className="text-xs text-black absolute bottom-10">©BLOKESHADE</motion.div>
+  </section>
 );
 
 const itemIds = [0, 1, 2, 3, 4];
