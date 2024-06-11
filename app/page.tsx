@@ -99,8 +99,8 @@ export default function Page() {
       <section ref={container}
         className='relative flex items-center justify-center h-screen'
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}>
-        <div className='relative z-10 p-10 sm:p-20 text-white w-full h-full flex flex-col justify-between'>
-          <p className='sm:w-[50vw] sm:text-[1.5vw] self-end uppercase  font-semibold'>Welcome to Blokeshade Enterprise, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade Enterprise.</p>
+        <div className='relative z-10 p-20 text-white w-full h-full flex flex-col justify-between'>
+          <p className='sm:w-[50vw] sm:text-[2vw] self-end uppercase text-justify font-semibold'>Welcome to Blokeshade Enterprise, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade Enterprise.</p>
         </div>
         <div className='fixed top-[-10vh] left-0 h-[120vh] w-full'>
           <motion.div style={{ y }} className='relative w-full h-full'>

@@ -18,16 +18,18 @@ const variants = {
   }
 };
 
-const menu = ["HOME", "WORK", "GALLERY", "ABOUT"];
+const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 
 export const Item = ({ i }:{i:any}) => {
+  const style = { border: `2px solid ${colors[i]}` };
   return (
     <motion.li
       variants={variants}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="text-5xl text-gray-700">{menu[i]}</div>
+      <div className="icon-placeholder" style={style} />
+      <div className="text-placeholder" style={style} />
     </motion.li>
   );
 };
