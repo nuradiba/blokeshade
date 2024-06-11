@@ -1,7 +1,8 @@
 "use client"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { useEffect, useRef, useState } from 'react'
 import Character from './components/character'
+import Preloader from './components/preloader'
 import Image from 'next/image'
 import ALIP0330 from '../public/ALIP0330.jpeg'
 import Lenis from '@studio-freight/lenis'
@@ -11,8 +12,17 @@ const paragraph = "Experience the adrenaline of motorsports through our lens at 
 
 export default function Page() {
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const lenis = new Lenis()
+
+    setTimeout(() => {
+      setIsLoading(false);
+      document.body.style.cursor = 'default'
+      window.scrollTo(0, 0);
+    }, 2000)
+
     function raf(time: number) {
       lenis.raf(time)
       requestAnimationFrame(raf)
@@ -30,6 +40,9 @@ export default function Page() {
 
   return (
     <main className="bg-black text-white w-screen">
+      <AnimatePresence mode='wait'>
+        {isLoading && <Preloader />}
+      </AnimatePresence>
       <section className="grid h-screen">
         <div className="place-self-center">
           <motion.div
