@@ -37,6 +37,7 @@ export default function Header() {
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
+      className="sm:hidden"
     >
       <motion.div className="background" variants={sidebar} />
       <Navigation />
