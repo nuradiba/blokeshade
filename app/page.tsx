@@ -6,7 +6,6 @@ import Preloader from './components/preloader'
 import Image from 'next/image'
 import ALIP0330 from '../public/ALIP0330.jpeg'
 import Lenis from '@studio-freight/lenis'
-import Zoom from './components/zoom'
 
 const paragraph = "Experience the adrenaline of motorsports through our lens at Blokeshade Enterprise. From track to road, we immortalize every electrifying moment. Enjoy the pictures above!"
 
@@ -111,7 +110,6 @@ export default function Page() {
       <section className="grid content-center h-screen">
         <Character paragraph={paragraph} />
       </section>
-      <Zoom />
     </main>
   );
 }

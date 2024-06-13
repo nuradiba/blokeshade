@@ -19,6 +19,7 @@ const variants = {
 };
 
 const menu = ["HOME", "WORK", "GALLERY", "ABOUT"];
+const href = ["/", "/work", "/gallery", "/about"];
 
 export const Item = ({ i }:{i:any}) => {
   return (
@@ -27,7 +28,7 @@ export const Item = ({ i }:{i:any}) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="text-5xl text-gray-700">{menu[i]}</div>
+      <a className="text-5xl text-gray-700" href={href[i]}>{menu[i]}</a>
     </motion.li>
   );
 };

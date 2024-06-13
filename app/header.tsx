@@ -5,6 +5,7 @@ import { motion, useCycle } from "framer-motion";
 import { Dimensions } from "./components/nav/dimensions";
 import { Toggle } from "./components/nav/toggle";
 import { Navigation } from "./components/nav/navigation";
+import Disperse from "./components/disperse";
 
 const sidebar = {
   open: (height = 1000) => ({
@@ -32,16 +33,26 @@ export default function Header() {
   const { height } = Dimensions(containerRef);
 
   return (
-    <motion.nav
-      initial={false}
-      animate={isOpen ? "open" : "closed"}
-      custom={height}
-      ref={containerRef}
-      className="sm:hidden"
-    >
-      <motion.div className="background" variants={sidebar} />
-      <Navigation />
-      <Toggle toggle={() => toggleOpen()} />
-    </motion.nav>
+    <header>
+      <motion.nav
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        custom={height}
+        ref={containerRef}
+        className="sm:hidden"
+      >
+        <motion.div className="background" variants={sidebar} />
+        <Navigation />
+        <Toggle toggle={() => toggleOpen()} />
+      </motion.nav>
+      <nav className="hidden sm:block">
+        <div className="flex gap-10 justify-center p-10 tracking-wider text-lg">
+          <a href="/"><Disperse><span>HOME</span></Disperse></a>
+          <a href="/work"><Disperse><span>WORK</span></Disperse></a>
+          <a href="/gallery"><Disperse><span>GALLERY</span></Disperse></a>
+          <a href="/about"><Disperse><span>ABOUT</span></Disperse></a>
+        </div>
+      </nav>
+    </header>
   );
 };
