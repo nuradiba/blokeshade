@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -267,28 +269,4 @@ li {
       margin-right: 10px;
     }
   }
-}
-
-.introLine {
-  display: flex;
-  justify-content: space-between;
-  text-transform: uppercase;
-}
-
-.introLine span {
-  margin: 0px;
-}
-
-.introLine:nth-of-type(5),
-.introLine:nth-of-type(6) {
-  display: inline-flex;
-}
-
-.introLine:nth-of-type(6) {
-  right: -40px;
-  position: relative;
-}
-
-.introLine span {
-  margin: 0px;
 }

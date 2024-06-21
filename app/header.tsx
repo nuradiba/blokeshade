@@ -33,7 +33,7 @@ export default function Header() {
   const { height } = Dimensions(containerRef);
 
   return (
-    <header>
+    <header className="absolute z-50 inset-0">
       <motion.nav
         initial={false}
         animate={isOpen ? "open" : "closed"}
@@ -46,7 +46,7 @@ export default function Header() {
         <Toggle toggle={() => toggleOpen()} />
       </motion.nav>
       <nav className="hidden sm:block">
-        <div className="flex gap-10 justify-center p-10 tracking-wider text-lg">
+        <div className="flex gap-10 justify-center p-10 tracking-wider font-semibold">
           <a href="/"><Disperse><span>HOME</span></Disperse></a>
           <a href="/work"><Disperse><span>WORK</span></Disperse></a>
           <a href="/gallery"><Disperse><span>GALLERY</span></Disperse></a>

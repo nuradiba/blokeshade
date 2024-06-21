@@ -2,6 +2,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { Item } from "./item";
 import { Footer } from "./footer";
+import { Copyright } from "./copyright";
 
 const variants = {
   open: {
@@ -24,7 +25,7 @@ export const Navigation = () => (
         <Footer i={i} key={i} />
       ))}
     </motion.div>
-    <motion.div className="text-xs text-black absolute bottom-10">©BLOKESHADE</motion.div>
+    <motion.div variants={variants}><Copyright /></motion.div>
   </section>
 );
 
