@@ -45,7 +45,7 @@ export default function Header() {
         <Navigation />
         <Toggle toggle={() => toggleOpen()} />
       </motion.nav>
-      <nav className="hidden sm:block">
+      <nav className="hidden sm:block text-black">
         <div className="flex gap-10 justify-center p-10 tracking-wider">
           <a href="/"><Disperse><span>HOME</span></Disperse></a>
           <a href="/work"><Disperse><span>WORK</span></Disperse></a>
