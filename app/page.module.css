@@ -1,14 +1,14 @@
-.main{
+.main {
     margin-bottom: 100vh;
-  }
-  
-  .container{
+}
+
+.container {
     position: relative;
     height: 300vh;
     background-color: rgb(255, 255, 255);
-  }
-  
-  .stickyMask{
+}
+
+.stickyMask {
     display: flex;
     overflow: hidden;
     position: sticky;
@@ -20,10 +20,52 @@
     mask-position: 52.35% center;
     mask-repeat: no-repeat;
     mask-size: 80%;
-  }
-  
-  .stickyMask iframe{
+}
+
+.stickyMask iframe {
     height: 100%;
     width: 100%;
     object-fit: cover;
-  }
+}
+
+.gallery {
+    height: 175vh;
+    overflow: hidden;
+    background: rgb(45, 45, 45);
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    padding: 2vw;
+    box-sizing: border-box;
+
+    .column {
+        position: relative;
+        height: 100%;
+        width: 25%;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 2vw;
+
+        .imageContainer {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            border-radius: 1vw;
+            overflow: hidden;
+        }
+
+        &:nth-of-type(1){
+            top: -45%
+        }
+        &:nth-of-type(2){
+            top: -95%
+        }
+        &:nth-of-type(3){
+            top: -45%
+        }
+        &:nth-of-type(4){
+            top: -75%
+        }
+    }
+}
