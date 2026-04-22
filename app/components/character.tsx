@@ -13,7 +13,7 @@ export default function Paragraph({paragraph}:{paragraph:any}) {
   return (
     <p 
       ref={container}         
-      className="paragraph text-3xl sm:text-5xl"
+      className="paragraph lg:text-5xl text-2xl font-bold leading-snug"
     >
     {
       words.map( (word:any, i:any) => {

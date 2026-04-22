@@ -4,26 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 import Preloader from './components/preloader'
 import styles from './page.module.css'
 import Character from './components/character'
-import useDimension from './components/useDimension'
 import Image from 'next/image'
-import Lenis from 'lenis'
 
-const paragraph = "Welcome to Blokeshade Enterprise, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
+const paragraph = "Welcome to Blokeshade, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
 
-const images = [
-  "1.jpeg",
-  "2.jpeg",
-  "3.jpeg",
-  "4.jpeg",
-  "5.jpeg",
-  "6.jpeg",
-  "7.jpeg",
-  "ALIP0330.jpeg",
-  "1.jpeg",
-  "2.jpeg",
-  "3.jpeg",
-  "4.jpeg"
-]
+const horizontalVideoId = "FrSHYxpsBhk"
+const verticalVideoId = "gtD2_zLSdiA"
 
 export default function Page() {
 
@@ -39,35 +25,12 @@ export default function Page() {
   }, [])
   //End Preloader
 
-  const gallery = useRef(null);
-  const { height } = useDimension();
-  const { scrollYProgress } = useScroll({
-    target: gallery,
-    offset: ['start end', 'end start']
-  })
-  const y = useTransform(scrollYProgress, [0, 1], [0, height * 2])
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, height * 3.3])
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, height * 1.25])
-  const y4 = useTransform(scrollYProgress, [0, 1], [0, height * 3])
-
-  useEffect(() => {
-
-    const lenis = new Lenis()
-
-    function raf(time: number){
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-  }, [])
-
   // Initial SVG Masking
   let container = useRef(null);
   const stickyMask = useRef(null);
 
   const initialMaskSize = .8;
-  const targetMaskSize = 30;
+  const targetMaskSize = 200;
   const easing = 0.15;
   let easedScrollProgress = 0;
 
@@ -94,23 +57,30 @@ export default function Page() {
       <AnimatePresence mode='wait'>
         {isLoading && <Preloader />}
       </AnimatePresence>
-      <div ref={container} className={styles.container}>
-        <div ref={stickyMask} className={styles.stickyMask}>
-          <iframe className="w-screen pointer-events-none	" src="https://www.youtube.com/embed/COrZude7To4?si=MZJeRTENZ_PbktaE&amp;controls=0&autoplay=1&mute=1&loop=1&playlist=COrZude7To4&start=10&end=100&showinfo=0" />
+      <div className="hidden lg:block">
+        <div ref={container} className={styles.container}>
+          <div ref={stickyMask} className={styles.stickyMask}>
+            <iframe
+              className="w-screen pointer-events-none"
+              src={`https://www.youtube.com/embed/${horizontalVideoId}?controls=0&autoplay=1&mute=1&loop=1&playlist=${horizontalVideoId}&start=10&end=100`}
+            />
+          </div>
         </div>
       </div>
-      <section className="grid content-center h-screen">
-        <Character paragraph={paragraph} />
-      </section>
-      <section>
-        <div className='h-screen' />
-        <div ref={gallery} className={styles.gallery}>
-          <Column images={[images[0], images[1], images[2]]} y={y}  />
-          <Column images={[images[3], images[4], images[5]]} y={y2} />
-          <Column images={[images[6], images[7], images[8]]} y={y3} />
-          <Column images={[images[9], images[10], images[11]]} y={y4} />
+      <div className={`lg:hidden ${styles.mobileHero}`}>
+        <div className={styles.mobileVideo}>
+          <iframe
+            className={styles.mobileVideoFrame}
+            title="Blokeshade mobile hero video"
+            src={`https://www.youtube.com/embed/${verticalVideoId}?controls=0&autoplay=1&mute=1&loop=1&playsinline=1&playlist=${verticalVideoId}&start=10&end=100`}
+            allow="autoplay; encrypted-media; picture-in-picture"
+          />
+          <div className={styles.mobileVideoOverlay} />
+          <div className={styles.mobileVideoTitle}>BLOKESHADE</div>
         </div>
-        <div className='h-screen' />
+      </div>
+      <section className="grid content-center h-screen mt-10">
+        <Character paragraph={paragraph} />
       </section>
     </main>
   );
