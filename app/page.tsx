@@ -1,5 +1,5 @@
 "use client"
-import { AnimatePresence, useTransform, useScroll, motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from 'react'
 import Preloader from './components/preloader'
 import styles from './page.module.css'
