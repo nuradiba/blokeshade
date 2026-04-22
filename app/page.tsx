@@ -5,6 +5,7 @@ import Preloader from './components/preloader'
 import styles from './page.module.css'
 import Character from './components/character'
 import Image from 'next/image'
+import Zoom from './components/zoom'
 
 const paragraph = "Welcome to Blokeshade, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
 
@@ -81,6 +82,9 @@ export default function Page() {
       </div>
       <section className="grid content-center h-screen mt-10">
         <Character paragraph={paragraph} />
+      </section>
+      <section className="h-[300vh]">
+        <Zoom />
       </section>
     </main>
   );
