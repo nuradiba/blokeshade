@@ -1,11 +1,11 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion"
+import Link from "next/link"
 import { useEffect, useRef, useState } from 'react'
 import Preloader from './components/preloader'
 import styles from './page.module.css'
-import Character from './components/character'
-import Image from 'next/image'
 import Zoom from './components/zoom'
+import HorizontalScroll from './components/horizontal-scroll'
 
 const paragraph = "Welcome to Blokeshade, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
 
@@ -80,26 +80,47 @@ export default function Page() {
           <div className={styles.mobileVideoTitle}>BLOKESHADE</div>
         </div>
       </div>
-      <section className="grid content-center h-screen mt-10">
-        <Character paragraph={paragraph} />
+      <section className="grid content-center h-screen my-10">
+        <p className="paragraph lg:text-5xl text-2xl font-bold leading-snug text-justify">{paragraph}</p>
       </section>
-      <section className="h-[300vh]">
+      <section className="h-[300vh] hidden lg:block">
         <Zoom />
+      </section>
+      <section className="lg:hidden">
+        <HorizontalScroll />
+      </section>
+      <section className="bg-black mt-4 lg:mt-8 px-8 pb-24 flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.7 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <Link href="/gallery">
+            <motion.span
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.98 }}
+              animate={{ y: [0, -6, 0] }}
+              transition={{
+                y: {
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                scale: {
+                  duration: 0.2,
+                },
+              }}
+              className="inline-flex items-center gap-2 rounded-full border border-white px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black lg:gap-3 lg:px-8 lg:py-4 lg:text-sm lg:tracking-[0.35em]"
+            >
+              Explore Gallery
+              <span aria-hidden="true" className="text-sm leading-none lg:text-lg">
+                →
+              </span>
+            </motion.span>
+          </Link>
+        </motion.div>
       </section>
     </main>
   );
-}
-
-const Column = ({ images, y = 0 }: { images: any[], y: any }) => {
-  return (
-    <motion.div style={{ y }} className={styles.column}>
-      {
-        images.map((src, i) => {
-          return <div key={i} className={styles.imageContainer}>
-            <Image className='object-cover' src={`/${src}`} alt='image' fill />
-          </div>
-        })
-      }
-    </motion.div>
-  )
 }

@@ -18,8 +18,8 @@ const variants = {
   }
 };
 
-const menu = ["HOME", "WORK", "GALLERY", "ABOUT"];
-const href = ["/", "/work", "/gallery", "/about"];
+const menu = ["HOME", "GALLERY", "WORK", "ABOUT"];
+const href = ["/", "/gallery", "/work", "/about"];
 
 export const Item = ({ i }:{i:any}) => {
   return (
