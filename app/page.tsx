@@ -30,30 +30,37 @@ export default function Page() {
   //End Preloader
 
   // Initial SVG Masking
-  let container = useRef(null);
-  const stickyMask = useRef(null);
-
-  const initialMaskSize = .8;
-  const targetMaskSize = 200;
-  const easing = 0.15;
-  let easedScrollProgress = 0;
+  const container = useRef<HTMLDivElement | null>(null);
+  const stickyMask = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    requestAnimationFrame(animate)
+    const initialMaskSize = .8;
+    const targetMaskSize = 200;
+    const easing = 0.15;
+    let easedScrollProgress = 0;
+    let animationFrameId: number;
+
+    const getScrollProgress = () => {
+      if (!container.current || !stickyMask.current) return 0;
+
+      const scrollProgress = stickyMask.current.offsetTop / (container.current.getBoundingClientRect().height - window.innerHeight)
+      const delta = scrollProgress - easedScrollProgress;
+      easedScrollProgress += delta * easing;
+      return easedScrollProgress
+    }
+
+    const animate = () => {
+      if (!stickyMask.current) return;
+
+      const maskSizeProgress = targetMaskSize * getScrollProgress();
+      stickyMask.current.style.webkitMaskSize = (initialMaskSize + maskSizeProgress) * 100 + "%";
+      animationFrameId = requestAnimationFrame(animate)
+    }
+
+    animationFrameId = requestAnimationFrame(animate)
+
+    return () => cancelAnimationFrame(animationFrameId)
   }, [])
-
-  const animate = () => {
-    const maskSizeProgress = targetMaskSize * getScrollProgress();
-    stickyMask.current.style.webkitMaskSize = (initialMaskSize + maskSizeProgress) * 100 + "%";
-    requestAnimationFrame(animate)
-  }
-
-  const getScrollProgress = () => {
-    const scrollProgress = stickyMask.current.offsetTop / (container.current.getBoundingClientRect().height - window.innerHeight)
-    const delta = scrollProgress - easedScrollProgress;
-    easedScrollProgress += delta * easing;
-    return easedScrollProgress
-  }
   // End SVG Masking
 
   // Initial Mouse Image Distortion
