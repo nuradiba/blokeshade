@@ -6,6 +6,9 @@ import Preloader from './components/preloader'
 import styles from './page.module.css'
 import Zoom from './components/zoom'
 import HorizontalScroll from './components/horizontal-scroll'
+import Lenis from 'lenis'
+import Projects from './components/projects'
+import Scene from './components/scene'
 
 const paragraph = "Welcome to Blokeshade, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
 
@@ -52,6 +55,38 @@ export default function Page() {
     return easedScrollProgress
   }
   // End SVG Masking
+
+  // Initial Mouse Image Distortion
+  const [activeMenu, setActiveMenu] = useState<number | null>(null)
+  const projectSection = useRef<HTMLElement | null>(null)
+  useEffect( () => {
+    const lenis = new Lenis()
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  }, [])
+
+  useEffect(() => {
+    if (!projectSection.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          setActiveMenu(null)
+        }
+      },
+      { threshold: 0 }
+    )
+
+    observer.observe(projectSection.current)
+
+    return () => observer.disconnect()
+  }, [])
+    // End Mouse Image Distortion
 
   return (
     <main className="bg-black text-white w-screen">
@@ -120,6 +155,12 @@ export default function Page() {
             </motion.span>
           </Link>
         </motion.div>
+      </section>
+      <section ref={projectSection} className="w-screen max-w-none overflow-hidden font-gatwick">
+        <div className="h-[20vh]"></div>
+        <Projects setActiveMenu={setActiveMenu} />
+        <Scene activeMenu={activeMenu} />
+        <div className="h-[50vh]"></div>
       </section>
     </main>
   );

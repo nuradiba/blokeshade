@@ -4,6 +4,14 @@
 
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
+@font-face {
+  font-family: "PP Gatwick";
+  src: url("/PPGatwick-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -29,6 +37,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.font-gatwick {
+  font-family: "PP Gatwick", sans-serif;
 }
 
 .liner {
