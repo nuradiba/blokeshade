@@ -1,5 +1,6 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion"
+import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from 'react'
 import Preloader from './components/preloader'
@@ -12,8 +13,8 @@ import Scene from './components/scene'
 
 const paragraph = "Welcome to Blokeshade, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
 
-const horizontalVideoId = "FrSHYxpsBhk"
-const verticalVideoId = "gtD2_zLSdiA"
+const horizontalVideoId = "OrEBOPJERs0"
+const verticalVideoId = "8w-IQ7guBwI"
 
 export default function Page() {
 
@@ -119,11 +120,18 @@ export default function Page() {
             allow="autoplay; encrypted-media; picture-in-picture"
           />
           <div className={styles.mobileVideoOverlay} />
-          <div className={styles.mobileVideoTitle}>BLOKESHADE</div>
+          <Image
+            className={styles.mobileVideoLogo}
+            src="/LOGO.PNG"
+            alt="BLOKESHADE"
+            width={560}
+            height={235}
+            priority
+          />
         </div>
       </div>
       <section className="grid content-center h-screen my-10">
-        <p className="paragraph lg:text-5xl text-2xl font-bold leading-snug text-justify">{paragraph}</p>
+        <p className="paragraph lg:text-5xl text-2xl font-bold leading-snug">{paragraph}</p>
       </section>
       <section className="h-[300vh] hidden lg:block">
         <Zoom />

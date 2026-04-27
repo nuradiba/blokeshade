@@ -18,8 +18,8 @@ const variants = {
     }
 };
 
-const link = ["https://instagram.com/blokeshade", "https://wa.me/60134901462?text=Hi%20Blokeshade,%20can%20I%20get%20the%20package%20for%20photography/videography?", "mailto:blokeshade.service@gmail.com"];
-const title = ["INSTAGRAM", "WHATSAPP", "EMAIL"];
+const link = ["https://instagram.com/blokeshade", "https://www.tiktok.com/@blokeshadeofficial", "https://wa.me/601165530234?text=Hi%20Blokeshade,%20can%20I%20get%20the%20package%20for%20photography/videography?", "mailto:blokeshade.service@gmail.com"];
+const title = ["INSTAGRAM", "TIKTOK", "WHATSAPP", "EMAIL"];
 
 export const Footer = ({ i }: { i: any }) => {
     return (
