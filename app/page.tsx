@@ -11,7 +11,7 @@ import Lenis from 'lenis'
 import Projects from './components/projects'
 import Scene from './components/scene'
 
-const paragraph = "Welcome to Blokeshade, your go-to for top-tier photography and videography services in Malaysia. Specializing in motorsports, we capture the excitement of road photos, track action, product shoots, and unforgettable moments. Experience the thrill through our lens at Blokeshade."
+const paragraph = "Blokeshade Lenswork is a dedicated partner for those who demand excellence in motorsport media. With an extensive background in covering both superbike and supercar events, we offer a specialized skill set that includes event documentation, private client commissions, and commercial product photography. Recognizing the shift toward vertical video, we have mastered the art of social media storytelling, delivering high-energy reels and aesthetic transitions that elevate your brand's presence on platforms like Instagram and TikTok."
 
 const horizontalVideoId = "OrEBOPJERs0"
 const verticalVideoId = "8w-IQ7guBwI"
@@ -130,8 +130,34 @@ export default function Page() {
           />
         </div>
       </div>
-      <section className="grid content-center h-screen my-10">
-        <p className="paragraph lg:text-5xl text-2xl font-bold leading-snug">{paragraph}</p>
+      <section className="relative grid min-h-screen content-center overflow-hidden bg-black px-6 py-24 sm:px-10 lg:px-16">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+        <div className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full border border-white/10" />
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.28fr_1fr] lg:items-start">
+          <div className="flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.28em] text-white/55">
+            <span className="h-px w-12 bg-white/40" />
+            <span>Lenswork</span>
+          </div>
+          <div className="space-y-10">
+            <p className="max-w-5xl text-2xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+              {paragraph}
+            </p>
+            <div className="flex flex-col gap-5 border-l border-white/20 pl-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <p className="max-w-xl text-sm leading-6 text-white/60 sm:text-base">
+                Motorsport stories shaped with precision, pace, and a sharp eye for the moments between the noise.
+              </p>
+              <a
+                href="/about"
+                className="inline-flex w-fit items-center gap-3 rounded-full border border-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-white transition duration-300 hover:bg-white hover:text-black"
+              >
+                About Blokeshade
+                <span aria-hidden="true" className="text-base leading-none">
+                  →
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
       <section className="h-[300vh] hidden lg:block">
         <Zoom />
@@ -146,7 +172,7 @@ export default function Page() {
           viewport={{ once: true, amount: 0.7 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <Link href="/gallery">
+          <a href="/gallery">
             <motion.span
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
@@ -168,7 +194,7 @@ export default function Page() {
                 →
               </span>
             </motion.span>
-          </Link>
+          </a>
         </motion.div>
       </section>
       <section ref={projectSection} className="w-screen max-w-none overflow-hidden font-gatwick">
