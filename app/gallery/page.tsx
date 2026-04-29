@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { galleryImages } from "../components/gallery-images";
 
 export default function Gallery() {
@@ -15,12 +14,6 @@ export default function Gallery() {
               Blokeshade
             </h1>
           </div>
-          <Link
-            href="/"
-            className="hidden border border-white/35 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] transition-colors hover:bg-white hover:text-black sm:inline-flex"
-          >
-            Home
-          </Link>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

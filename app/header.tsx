@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react";
 import { useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, useCycle } from "framer-motion";
 import { Dimensions } from "./components/nav/dimensions";
 import { Toggle } from "./components/nav/toggle";
@@ -31,6 +32,8 @@ export default function Header() {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = Dimensions(containerRef);
+  const pathname = usePathname();
+  const desktopTextColor = pathname === "/gallery" ? "text-white" : "text-black";
 
   return (
     <header className="absolute z-50 inset-0">
@@ -45,7 +48,7 @@ export default function Header() {
         <Navigation />
         <Toggle toggle={() => toggleOpen()} />
       </motion.nav>
-      <nav className="hidden sm:block text-black">
+      <nav className={`hidden sm:block ${desktopTextColor}`}>
         <div className="flex gap-10 justify-center p-10 tracking-wider">
           <a href="/"><Disperse><span>HOME</span></Disperse></a>
           <a href="/work"><Disperse><span>WORK</span></Disperse></a>

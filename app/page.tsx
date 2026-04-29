@@ -146,15 +146,15 @@ export default function Page() {
               <p className="max-w-xl text-sm leading-6 text-white/60 sm:text-base">
                 Motorsport stories shaped with precision, pace, and a sharp eye for the moments between the noise.
               </p>
-              <a
+              <Link
                 href="/about"
-                className="inline-flex w-fit items-center gap-3 rounded-full border border-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-white transition duration-300 hover:bg-white hover:text-black"
+                className="relative z-[60] inline-flex w-fit items-center gap-3 rounded-full border border-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-white transition duration-300 hover:bg-white hover:text-black"
               >
                 About Blokeshade
                 <span aria-hidden="true" className="text-base leading-none">
                   →
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@ export default function Page() {
           viewport={{ once: true, amount: 0.7 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <a href="/gallery">
+          <Link href="/gallery">
             <motion.span
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
@@ -187,14 +187,14 @@ export default function Page() {
                   duration: 0.2,
                 },
               }}
-              className="inline-flex items-center gap-2 rounded-full border border-white px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black lg:gap-3 lg:px-8 lg:py-4 lg:text-sm lg:tracking-[0.35em]"
+              className="relative z-[60] inline-flex items-center gap-2 rounded-full border border-white px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black lg:gap-3 lg:px-8 lg:py-4 lg:text-sm lg:tracking-[0.35em]"
             >
               Explore Gallery
               <span aria-hidden="true" className="text-sm leading-none lg:text-lg">
                 →
               </span>
             </motion.span>
-          </a>
+          </Link>
         </motion.div>
       </section>
       <section ref={projectSection} className="w-screen max-w-none overflow-hidden font-gatwick">
