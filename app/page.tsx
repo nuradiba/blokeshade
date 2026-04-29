@@ -199,6 +199,25 @@ export default function Page() {
       </section>
       <section ref={projectSection} className="w-screen max-w-none overflow-hidden font-gatwick">
         <div className="h-[20vh]"></div>
+        <div className="mx-auto mb-12 flex max-w-7xl flex-col gap-6 px-6 text-white sm:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-16">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-white/55">
+              Selected Work
+            </p>
+            <h2 className="text-4xl uppercase leading-none sm:text-6xl lg:text-8xl">
+              Projects
+            </h2>
+          </div>
+          <Link
+            href="/work"
+            className="relative z-[60] inline-flex w-fit items-center gap-3 rounded-full border border-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-white transition duration-300 hover:bg-white hover:text-black"
+          >
+            View All Work
+            <span aria-hidden="true" className="text-base leading-none">
+              →
+            </span>
+          </Link>
+        </div>
         <Projects setActiveMenu={setActiveMenu} />
         <Scene activeMenu={activeMenu} />
         <div className="h-[50vh]"></div>

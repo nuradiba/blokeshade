@@ -33,7 +33,7 @@ export default function Header() {
   const containerRef = useRef(null);
   const { height } = Dimensions(containerRef);
   const pathname = usePathname();
-  const desktopTextColor = pathname === "/gallery" ? "text-white" : "text-black";
+  const desktopTextColor = pathname === "/gallery" || pathname === "/work" ? "text-white" : "text-black";
 
   return (
     <header className="absolute z-50 inset-0">
