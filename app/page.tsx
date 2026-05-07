@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import { useEffect, useRef, useState } from 'react'
 import Preloader from './components/preloader'
 import styles from './page.module.css'
@@ -9,12 +10,13 @@ import Zoom from './components/zoom'
 import HorizontalScroll from './components/horizontal-scroll'
 import Lenis from 'lenis'
 import Projects from './components/projects'
-import Scene from './components/scene'
+import { projects } from './work/works'
 
 const paragraph = "Blokeshade Lenswork is a dedicated partner for those who demand excellence in motorsport media. With an extensive background in covering both superbike and supercar events, we offer a specialized skill set that includes event documentation, private client commissions, and commercial product photography. Recognizing the shift toward vertical video, we have mastered the art of social media storytelling, delivering high-energy reels and aesthetic transitions that elevate your brand's presence on platforms like Instagram and TikTok."
 
 const horizontalVideoId = "OrEBOPJERs0"
 const verticalVideoId = "8w-IQ7guBwI"
+const Scene = dynamic(() => import('./components/scene'), { ssr: false })
 
 export default function Page() {
 
@@ -22,24 +24,82 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
 
-    setTimeout(() => {
+    const loadingTimer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.cursor = 'default'
       window.scrollTo(0, 0);
     }, 2000)
+
+    return () => clearTimeout(loadingTimer)
   }, [])
   //End Preloader
 
   // Initial SVG Masking
   const container = useRef<HTMLDivElement | null>(null);
   const stickyMask = useRef<HTMLDivElement | null>(null);
+  const mobileHero = useRef<HTMLDivElement | null>(null);
+  const [isDesktopLayout, setIsDesktopLayout] = useState<boolean | null>(null);
+  const [isDesktopHeroVisible, setIsDesktopHeroVisible] = useState(false);
+  const [hasLoadedDesktopVideo, setHasLoadedDesktopVideo] = useState(false);
+  const [hasLoadedMobileVideo, setHasLoadedMobileVideo] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)")
+
+    const updateLayout = () => {
+      setIsDesktopLayout(mediaQuery.matches)
+    }
+
+    updateLayout()
+    mediaQuery.addEventListener("change", updateLayout)
+
+    return () => mediaQuery.removeEventListener("change", updateLayout)
+  }, [])
+
+  useEffect(() => {
+    if (!container.current || isDesktopLayout !== true) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsDesktopHeroVisible(entry.isIntersecting)
+        if (entry.isIntersecting) {
+          setHasLoadedDesktopVideo(true)
+        }
+      },
+      { rootMargin: "200px 0px", threshold: 0 }
+    )
+
+    observer.observe(container.current)
+
+    return () => observer.disconnect()
+  }, [isDesktopLayout])
+
+  useEffect(() => {
+    if (!mobileHero.current || isDesktopLayout !== false) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasLoadedMobileVideo(true)
+        }
+      },
+      { rootMargin: "200px 0px", threshold: 0 }
+    )
+
+    observer.observe(mobileHero.current)
+
+    return () => observer.disconnect()
+  }, [isDesktopLayout])
+
+  useEffect(() => {
+    if (!isDesktopHeroVisible || isDesktopLayout !== true) return;
+
     const initialMaskSize = .8;
     const targetMaskSize = 200;
     const easing = 0.15;
     let easedScrollProgress = 0;
     let animationFrameId: number;
+    let previousFrameTime = 0;
 
     const getScrollProgress = () => {
       if (!container.current || !stickyMask.current) return 0;
@@ -50,32 +110,44 @@ export default function Page() {
       return easedScrollProgress
     }
 
-    const animate = () => {
+    const animate = (time: number) => {
       if (!stickyMask.current) return;
 
-      const maskSizeProgress = targetMaskSize * getScrollProgress();
-      stickyMask.current.style.webkitMaskSize = (initialMaskSize + maskSizeProgress) * 100 + "%";
+      if (time - previousFrameTime > 33) {
+        previousFrameTime = time;
+        const maskSizeProgress = targetMaskSize * getScrollProgress();
+        stickyMask.current.style.webkitMaskSize = (initialMaskSize + maskSizeProgress) * 100 + "%";
+      }
+
       animationFrameId = requestAnimationFrame(animate)
     }
 
     animationFrameId = requestAnimationFrame(animate)
 
     return () => cancelAnimationFrame(animationFrameId)
-  }, [])
+  }, [isDesktopHeroVisible, isDesktopLayout])
   // End SVG Masking
 
   // Initial Mouse Image Distortion
   const [activeMenu, setActiveMenu] = useState<number | null>(null)
+  const [isWorkSceneEnabled, setIsWorkSceneEnabled] = useState(false)
+  const [isProjectSectionInView, setIsProjectSectionInView] = useState(false)
   const projectSection = useRef<HTMLElement | null>(null)
   useEffect( () => {
     const lenis = new Lenis()
+    let animationFrameId: number
 
     function raf(time: number) {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      animationFrameId = requestAnimationFrame(raf)
     }
 
-    requestAnimationFrame(raf)
+    animationFrameId = requestAnimationFrame(raf)
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      lenis.destroy()
+    }
   }, [])
 
   useEffect(() => {
@@ -83,42 +155,86 @@ export default function Page() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        setIsProjectSectionInView(entry.isIntersecting)
         if (!entry.isIntersecting) {
           setActiveMenu(null)
         }
       },
-      { threshold: 0 }
+      { rootMargin: "160px 0px", threshold: 0 }
     )
 
     observer.observe(projectSection.current)
 
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)")
+
+    const updateWorkScene = () => {
+      setIsWorkSceneEnabled(mediaQuery.matches)
+      if (!mediaQuery.matches) {
+        setActiveMenu(null)
+      }
+    }
+
+    updateWorkScene()
+    mediaQuery.addEventListener("change", updateWorkScene)
+
+    return () => mediaQuery.removeEventListener("change", updateWorkScene)
+  }, [])
     // End Mouse Image Distortion
 
   return (
     <main className="bg-black text-white w-screen">
+      {isLoading && (
+        <motion.div
+          className="fixed inset-x-0 top-0 z-[120] h-1 overflow-hidden bg-white/10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <motion.div
+            className="h-full w-1/3 bg-white"
+            initial={{ x: "-100%" }}
+            animate={{ x: ["-100%", "300%"] }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.div>
+      )}
       <AnimatePresence mode='wait'>
         {isLoading && <Preloader />}
       </AnimatePresence>
-      <div className="hidden lg:block">
+      {isDesktopLayout === true && (
         <div ref={container} className={styles.container}>
           <div ref={stickyMask} className={styles.stickyMask}>
-            <iframe
-              className="w-screen pointer-events-none"
-              src={`https://www.youtube.com/embed/${horizontalVideoId}?controls=0&autoplay=1&mute=1&loop=1&playlist=${horizontalVideoId}&start=10&end=100`}
-            />
+            {hasLoadedDesktopVideo && (
+              <iframe
+                className="w-screen pointer-events-none"
+                title="Blokeshade desktop hero video"
+                src={`https://www.youtube.com/embed/${horizontalVideoId}?controls=0&autoplay=1&mute=1&loop=1&playlist=${horizontalVideoId}&start=10&end=100`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                loading="lazy"
+              />
+            )}
           </div>
         </div>
-      </div>
-      <div className={`lg:hidden ${styles.mobileHero}`}>
+      )}
+      {isDesktopLayout === false && (
+      <div ref={mobileHero} className={styles.mobileHero}>
         <div className={styles.mobileVideo}>
-          <iframe
-            className={styles.mobileVideoFrame}
-            title="Blokeshade mobile hero video"
-            src={`https://www.youtube.com/embed/${verticalVideoId}?controls=0&autoplay=1&mute=1&loop=1&playsinline=1&playlist=${verticalVideoId}&start=10&end=100`}
-            allow="autoplay; encrypted-media; picture-in-picture"
-          />
+          {hasLoadedMobileVideo && (
+            <iframe
+              className={styles.mobileVideoFrame}
+              title="Blokeshade mobile hero video"
+              src={`https://www.youtube.com/embed/${verticalVideoId}?controls=0&autoplay=1&mute=1&loop=1&playsinline=1&playlist=${verticalVideoId}&start=10&end=100`}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              loading="lazy"
+            />
+          )}
           <div className={styles.mobileVideoOverlay} />
           <Image
             className={styles.mobileVideoLogo}
@@ -130,6 +246,7 @@ export default function Page() {
           />
         </div>
       </div>
+      )}
       <section className="relative grid min-h-screen content-center overflow-hidden bg-black px-6 py-24 sm:px-10 lg:px-16">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
         <div className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full border border-white/10" />
@@ -159,12 +276,16 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section className="h-[300vh] hidden lg:block">
-        <Zoom />
-      </section>
-      <section className="lg:hidden">
-        <HorizontalScroll />
-      </section>
+      {isDesktopLayout === true && (
+        <section className="h-[300vh]">
+          <Zoom />
+        </section>
+      )}
+      {isDesktopLayout === false && (
+        <section>
+          <HorizontalScroll />
+        </section>
+      )}
       <section className="bg-black mt-4 lg:mt-8 px-8 pb-24 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -218,8 +339,34 @@ export default function Page() {
             </span>
           </Link>
         </div>
-        <Projects setActiveMenu={setActiveMenu} />
-        <Scene activeMenu={activeMenu} />
+        {isDesktopLayout === false && (
+          <div className="px-6 sm:px-10">
+            <div className="divide-y divide-white/15 border-y border-white/15">
+              {projects.slice(0, 7).map((project, index) => (
+                <Link
+                  href="/work"
+                  key={`${project.title}-${project.date}`}
+                  className="grid gap-4 py-6"
+                >
+                  <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
+                    <span>{(index + 1).toString().padStart(2, "0")}</span>
+                    <time>{project.date}</time>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl uppercase leading-none text-white">
+                      {project.title}
+                    </h3>
+                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/60">
+                      {project.describe}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+        {isDesktopLayout === true && <Projects setActiveMenu={setActiveMenu} />}
+        {isWorkSceneEnabled && isProjectSectionInView && <Scene activeMenu={activeMenu} />}
         <div className="h-[50vh]"></div>
       </section>
     </main>

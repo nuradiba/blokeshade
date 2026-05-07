@@ -17,10 +17,10 @@
     align-items: center;
     justify-content: center;
     isolation: isolate;
-    mask-image: url('/BLK-SHD-logo.svg');
+    mask-image: url('/blksvg.svg');
     mask-position: 58% center;
     mask-repeat: no-repeat;
-    mask-size: 100%;
+    mask-size: 80%;
 }
 
 .stickyMask iframe {
